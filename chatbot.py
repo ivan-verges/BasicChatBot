@@ -76,21 +76,21 @@ def response(user_response):
         return robo_response
 
 flag = True
-print("ROBO: My name is Robo. I will answer your queries about Banking and Financial Services. If you want to exit, type Bye!")
+print("VBot: My name is VBot. I will answer your queries about Banking and Financial Services. If you want to exit, type Bye!")
 while(flag == True):
     user_response = input()
     user_response = user_response.lower()
     if(user_response != 'bye'):
         if(user_response == 'thanks' or user_response == 'thank you' ):
             flag = False
-            print("ROBO: You are welcome..")
+            print("VBot: You are welcome..")
         else:
             if(greeting(user_response) != None):
-                print("ROBO: " + greeting(user_response))
+                print("VBot: " + greeting(user_response))
             else:
-                print("ROBO: ", end = "")
+                print("VBot: ", end = "")
                 print(response(user_response))
                 sent_tokens.remove(user_response)
     else:
         flag = False
-        print("ROBO: Bye! take care..")
+        print("VBot: Bye! take care..")
