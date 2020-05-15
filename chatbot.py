@@ -19,16 +19,12 @@ nltk.download('punkt', quiet = True)
 nltk.download('wordnet', quiet = True)
 
 #Reads ChatBot Content from File
-with open('chatbot.txt', 'r', encoding = 'utf8', errors = 'ignore') as fin:
+with open('banking.txt', 'r', encoding = 'utf8', errors = 'ignore') as fin:
     raw = fin.read().lower()
 
 #Tokenize Content By Sentences and By Words
 sent_tokens = nltk.sent_tokenize(raw)
 word_tokens = nltk.word_tokenize(raw)
-
-#Prints First Sentence Token and First Word Token
-print(sent_tokens[0])
-print(word_tokens[0])
 
 #Lematize Data
 def LemTokens(tokens):
@@ -80,7 +76,7 @@ def response(user_response):
         return robo_response
 
 flag = True
-print("ROBO: My name is Robo. I will answer your queries about Chatbots. If you want to exit, type Bye!")
+print("ROBO: My name is Robo. I will answer your queries about Banking and Financial Services. If you want to exit, type Bye!")
 while(flag == True):
     user_response = input()
     user_response = user_response.lower()

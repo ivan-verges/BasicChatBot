@@ -1,0 +1,20 @@
+Banking
+A bank is a financial intermediation organization, destined to offer its clients multiple facilities, among them: money management, financing, mortgages, debit cards, among others.
+
+Loan
+A loan is an instrument by financial intermediation entities, through which they provide an amount of money to one or more clients, so that they return the amount in a given time + an amount of interest.
+
+Debit
+A debit is a financial movement that affects an account to alter its balance. For savings and / or checking accounts, it represents a decrease in the balance. For a loan or credit card, it represents an increase in the balance.
+
+Credit
+A credit is a financial movement that affects an account to alter its balance. For savings and / or checking accounts, it represents an increase in the balance. For a loan or credit card, it represents a decrease in the balance.
+
+Card
+A card is a tool that allows its owner to manage his finances in a more agile way, avoiding the use of cash.
+
+Debit card
+A debit card allows its owner to make payments and purchases using plastic instead of paying with cash, the balance of this card is linked to an account of the owner of the card.
+
+Credit card
+A credit card allows its owner to make payments and purchases using a plastic instead of paying with cash, the balance of this card is linked to a credit line of the owner of the card.
