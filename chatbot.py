@@ -97,10 +97,10 @@ if __name__ == '__main__':
         talk_to_client(
             "Please type a Question about Hubs. If you want to exit, type Bye!")
         user_response = input()
-        if(user_response.lower() == 'bye'):
+        if(user_response.lower() == "bye"):
             flag = False
             talk_to_client("Bye! take care..")
-        elif (user_response.lower() == 'thanks' or user_response.lower() == 'thank you'):
+        elif ("thank" in user_response.lower()):
             flag = False
             talk_to_client("You are welcome..")
 
