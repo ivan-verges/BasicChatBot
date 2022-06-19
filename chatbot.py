@@ -1,8 +1,7 @@
-# Imports Librarie
+# Imports Libraries
 import random
 import string
 import warnings
-import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -13,52 +12,45 @@ warnings.filterwarnings('ignore')
 # TF-IDF: Term Frequency – Inverse Document Frequency
 
 # Downloads Auxiliar Vocabulary
+# nltk.download() => Opens the UI to View and Download the Vocabulary
 nltk.download('popular', quiet=True)
 nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
 
+# Chat Bot Variables
+BOT_NAME = "B-Bot"
+
+# Keyword Matching for Greeting
+GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up", "hey",)
+GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there", "hello", "I am glad you are chatting with me"]
+
 # Reads ChatBot Content from File
-with open('hubs.txt', 'r', encoding='utf8', errors='ignore') as fin:
+with open('banking.txt', 'r', encoding='utf8', errors='ignore') as fin:
     raw = fin.read().lower()
 
-# Tokenize Content By Sentences and By Words
+# Tokenize Content By Sentences
 sent_tokens = nltk.sent_tokenize(raw)
-word_tokens = nltk.word_tokenize(raw)
 
-# Lematize Data
-
-
+# Lematize Tokens
 def LemTokens(tokens):
     lemmer = WordNetLemmatizer()
     return [lemmer.lemmatize(token) for token in tokens]
 
-# Normalize Data
-
-
+# Lematize and Normalize Text
 def LemNormalize(text):
     remove_punct_dict = dict((ord(punct), None)
                              for punct in string.punctuation)
     return LemTokens(nltk.word_tokenize(text.lower().translate(remove_punct_dict)))
 
-
-# Keyword Matching for Greeting
-GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up", "hey",)
-GREETING_RESPONSES = ["hi", "hey", "*nods*", "hi there",
-                      "hello", "I am glad! You are talking to me"]
-
 # Return a Greeting if User Sent a Greeting
-
-
 def greeting(sentence):
     for word in sentence.split():
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
 
 # Process User Input, Get Response and Retuns it
-
-
 def response(user_response):
-    robo_response = ''
+    bot_response = ''
 
     # Add User Response to Sent Tokens List to Process Similarity
     sent_tokens.append(user_response)
@@ -79,33 +71,35 @@ def response(user_response):
 
     # Sets the Bot Answer to the Response String
     if(flat[-2] == 0):
-        robo_response = robo_response + "I am sorry! I don't understand you"
-        return robo_response
+        bot_response = bot_response + "I am sorry, but i don't Understand your Question"
     else:
-        robo_response = robo_response+sent_tokens[idx]
-        return robo_response
+        bot_response = bot_response+sent_tokens[idx]
+    
+    # Removes the User Response from the Sent Tokens List
+    sent_tokens.remove(user_response)
 
+    # Returns the Response from Bot
+    return bot_response
 
+# Write Text to User
 def talk_to_client(message):
-    print("VBot: " + message)
+    print(f"{BOT_NAME}: " + message)
 
-
+# Executes the Chat Bot
 if __name__ == '__main__':
     flag = True
-    talk_to_client("My name is VBot. I will answer your queries about Hubs.")
+    talk_to_client(f"My name is {BOT_NAME}. I will answer your queries about Banking.")
     while(flag == True):
         talk_to_client(
-            "Please type a Question about Hubs. If you want to exit, type Bye!")
+            "Please type a Question about Banking. If you want to exit, type Bye!")
         user_response = input()
-        if(user_response.lower() == "bye"):
+        if("bye" in user_response.lower()):
             flag = False
             talk_to_client("Bye! take care..")
         elif ("thank" in user_response.lower()):
             flag = False
             talk_to_client("You are welcome..")
-
-        if (greeting(user_response) != None):
+        elif (greeting(user_response) != None):
             talk_to_client(greeting(user_response))
         else:
             talk_to_client(response(user_response))
-            sent_tokens.remove(user_response)
